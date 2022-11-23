@@ -19,15 +19,17 @@ class FirebaseService
     public function getAccessToken()
     {
         $data = $this->client->getAccessToken();
+        // dd($data);
         return $data['access_token'];
     }
 
-    public function sendNotification($authKey, $data)
+    public function sendNotification(string $authKey, string $data)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:application/json', 'Authorization: key=' . $authKey]);
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:application/json', 'Authorization: ' . $authKey]);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
